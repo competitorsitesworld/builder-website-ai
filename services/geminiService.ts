@@ -7,6 +7,10 @@ export const analyzeProjectInquiry = async (
   projectDescription: string
 ): Promise<ProjectAnalysis> => {
   try {
+    if (!process.env.API_KEY) {
+      throw new Error("API Key is missing. Please configure it in your environment variables.");
+    }
+
     const model = "gemini-2.5-flash";
     const prompt = `
       You are an expert construction project estimator for a premium contracting company called TITAN CONSTRUCT.
